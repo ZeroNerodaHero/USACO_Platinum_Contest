@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const unsigned int MX = (1<<20);
+const unsigned int MX = (1<<22);
 const unsigned int MK = MX-1;
 const unsigned int MV = ~MK;
 #define MOD(x) do {if(x>=P) x-=P;} while(0)
@@ -50,11 +50,11 @@ int N, C, B;
 int ans = 0;
 const int P = 1e9+7;
 
-int s[3000], t[3000], s1[1000];
+int s[3000], t[3000], s1[3000];
 htable dp[2];
 const int mask = (1<<16)-1;
 
-const int z = 600;
+const int z = 1600;
 long long  perm[z][z];
 int comb[z][z];
 
