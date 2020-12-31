@@ -22,12 +22,10 @@ int dp[2][SIZE][SIZE];
 int pow(int e){
     if(e < 30) return 1 << e;
     long long tmp = pow(e/2);
-    tmp *= tmp;
-    MOD2(tmp);
+    tmp *= tmp; MOD2(tmp);
     if(e & 1){
-        tmp <<= 1;
+        tmp <<= 1; MOD(tmp);
     }
-    MOD(tmp);
     return tmp;
 }   
 
@@ -46,7 +44,7 @@ int dfs(int x, int y, bool red){
         if((x+1) <= N && !a[x+1][y]){    //put red here
             ll tmp = dfs(x+1,y,0);
             tmp *= INV2; MOD2(tmp);
-            total += tmp;
+            total += tmp; MOD(total);
         }
     } else{
         if((x+1) <= N){
@@ -55,7 +53,7 @@ int dfs(int x, int y, bool red){
         if((y+1) <= N && !a[x][y+1]){
             ll tmp = dfs(x,y+1,1);
             tmp *= INV2; MOD2(tmp);
-            total += tmp;
+            total += tmp; MOD(total);
         }
     }
     dp[red][x][y] =total;
@@ -77,8 +75,7 @@ int main(){
     }
     memset(dp,-1,sizeof(dp));
     sum = pow(t);
-    ans += dfs(1,0,0);
-    ans += dfs(0,1,1);
+    ans = dfs(1,0,0)+ dfs(0,1,1); MOD(ans);
     out<< ans << endl;
     
 }

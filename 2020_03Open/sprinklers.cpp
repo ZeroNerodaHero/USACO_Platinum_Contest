@@ -25,12 +25,10 @@ ll r[SIZE][SIZE];
 int pow(int e){
     if(e < 30) return 1 << e;
     long long tmp = pow(e/2);
-    tmp *= tmp;
-    MOD2(tmp);
+    tmp *= tmp; MOD2(tmp);
     if(e & 1){
-        tmp <<= 1;
+        tmp <<= 1; MOD(tmp);
     }
-    MOD(tmp);
     return tmp;
 }   
 
@@ -54,18 +52,11 @@ int main(){
 
     for(int i = 0; i <= N; i++){
         for(int j = 0; j <= N; j++){
-            if(r[i][j]){
-                r[i][j+1] += r[i][j]; MOD(r[i][j+1]);
-                if(!a[i+1][j]){
-                    b[i+1][j] += (r[i][j]* INV2); MOD2(b[i+1][j]);
-                }
-            } 
-            if(b[i][j]){
-                b[i+1][j] += b[i][j]; MOD(b[i+1][j]);
-                if(!a[i][j+1]){
-                    r[i][j+1] += (b[i][j] * INV2); MOD2(r[i][j+1]);
-                }
-            }
+            r[i][j+1] += r[i][j]; MOD(r[i][j+1]);
+            if(!a[i+1][j]){ b[i+1][j] += (r[i][j]* INV2); MOD2(b[i+1][j]); }
+
+            b[i+1][j] += b[i][j]; MOD(b[i+1][j]);
+            if(!a[i][j+1]){ r[i][j+1] += (b[i][j] * INV2); MOD2(r[i][j+1]); }
         }
     }
     ans = r[N][N] + b[N][N]; MOD(ans);
