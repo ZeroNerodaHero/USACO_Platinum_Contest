@@ -32,6 +32,7 @@ int pow(int e){
 int dfs(int x, int y, bool red){
     if(dp[red][x][y] >= 0) return dp[red][x][y];
     if(x == N && y == N){
+        dp[red][x][y] = sum;
         return sum;
     }
 
