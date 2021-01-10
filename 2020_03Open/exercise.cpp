@@ -3,6 +3,7 @@ using namespace std;
 
 #define SIZE 7505 
 #define MODS(x) if(x<0) x+=M
+#define MOD(x) if(x >= M) x-=M
 typedef long long ll;
 typedef pair<int, int> PI;
 typedef vector<int> VI;
@@ -27,7 +28,7 @@ FastMod F(1),B(1);
 
 int N,M,m;
 int t = 1;
-int b[SIZE],f[SIZE],s[SIZE][SIZE],dp[2][SIZE];
+int b[SIZE],s[SIZE][SIZE],dp[2][SIZE];
 bool p[SIZE];
 
 void init(){
@@ -39,16 +40,14 @@ void init(){
         }
     }
 
+    int n = sqrt(N)+1;
     for(int i = 2; i <= N; i++){
         if(p[i]) continue;
-        for(int j = i, k = i; j <= N;){
-            p[j] = 1, b[m] = i, f[m++] = j;
-            for(k *= i, j+= i; j <= min(k-1,N); j+= i){
-                p[j] = 1;
-            }
+        for(int j = i; j <= N; j += i){
+            p[j] = 1;
         }
+        b[m++] = i;
     }
-    
 }
 
 ull modp(ull b, int y){
@@ -88,7 +87,11 @@ int main(){
     init();
     ull ans = 1;
     for(int i = 0; i < m; i++){
-        ans = B.reduce(ans * modp(b[i],cnt(f[i])));
+        int exp = 0;
+        for(int j = b[i]; j <= N; j *= b[i]){
+            exp += cnt(j); MOD(exp);
+        }
+        ans = B.reduce(ans * modp(b[i],exp));
     }
     out << ans << endl;
 }
