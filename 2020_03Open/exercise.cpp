@@ -40,7 +40,6 @@ void init(){
         }
     }
 
-    int n = sqrt(N)+1;
     for(int i = 2; i <= N; i++){
         if(p[i]) continue;
         for(int j = i; j <= N; j += i){
