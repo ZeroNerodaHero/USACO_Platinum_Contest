@@ -9,11 +9,14 @@ This is typically one interval DP, transition from small interval [i,j] to bigge
 Where z[k][i][j] is the cow who can eat k, and has the maximum weight over interval [i,j].
 
 The [pieaters.cpp](/2019_12Dec/pieaters.cpp) computes z while doing DP transition. It should be fastest.  I include the execution time in the code.
+
 The [pieaters0.cpp](/2019_12Dec/pieaters0.cpp) is similar to the [pieaters.cpp](/2019_12Dec/pieaters.cpp). It starts transition from the intervals from left side. 
+
 The [pieaters1.cpp](/2019_12Dec/pieaters1.cpp) pre-computes z first.  Then it does DP state transition.  It is slower than [pieaters.cpp](/2019_12Dec/pieaters.cpp).
 
 
 The [pieaters_dp_bitmask.cpp](/2019_12Dec/pieaters_dp_bitmask.cpp) is one bitmask DP.  It could pass some cases, but not all the cases.  Thus I do not use bitset or other bit data structure. It can also be bottom-up, like the one in hamiltonian path given by Bellman, Held, and Karp.
+
 The [pieaters_perm.cpp](/2019_12Dec/pieaters_perm.cpp) and [pieaters_perm1.cpp](/2019_12Dec/pieaters_perm1.cpp) is brute-force solution.  It uses the permuation.  It could pass only the basic test case.
 
 ## 2. Bessie's Snow Cow
