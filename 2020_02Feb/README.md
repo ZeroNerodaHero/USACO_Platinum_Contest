@@ -16,12 +16,12 @@ As a lot of points have no cow in transitioned graph, we can do optimization by 
 
 ## 3. Help Yourself
 
-This is DP problem.  The state dp[i] records the information of the subset which has the rightmost postion i.  The jth information dp[j][i] is **the sum of (c<sup>j</sup>) **where c is the complexity.  When complexity increases by one, the polynomial expansion formula can be used to update DP table.
+This is DP problem.  The state dp[i] records the information of the subset which has the rightmost postion i.  The jth information dp[j][i] is **the sum of (c<sup>j</sup>)** where c is the complexity.  When complexity increases by one, the polynomial expansion formula can be used to update DP table.
 
 First sort segments by left coordinate, and try placing the segment [l,r] into a subset in this order. So we only consider the relationship between the newly added segmenti [l,r] and the last segment, ending at i, in this subset.  We check the following three cases in order:
 1. l > i, the complexity of new subset increses by 1, the rightmost point of the subset becomes r.
 2. r > i, the complexity is not changed, but rightmost point of new subset is r.
-3. the comlexity and rightmost point of this newly created subset is the same as old subset.
+3. the complexity and rightmost point of this newly created subset is the same as old subset.
 
 If we use array for DP state, the time complexity will be (N<sup>2</sup>K).  As segment tree can support range query, single point update, and range update with lazy propagation, we store the DP state into segment tree.  As there are only N (not 2N) rightmost point, the segment tree range is [0,N].
 
