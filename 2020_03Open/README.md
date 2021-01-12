@@ -5,7 +5,9 @@
 **Transition line** is defined as a zigzag line, which moves only down and forward, to divide the whole field into two parts.  The corn sprinkler must be placed at the corner when it turns down while an alfalfa sprinkler must be placed at the corner where it turns forward.
 
 In [sprinklers.cpp](/2020_03Open/sprinklers.cpp) uses bottom-up dynamic programming.
+
 In [sprinklers0_dp_topdown.cpp](/2020_03Open/sprinklers0_dp_topdown.cpp) uses top-down DP.
+
 In [prinklers_modint.cpp](/2020_03Open/sprinklers_modint.cpp) uses modular integer data structure.
 
 All three program above can pass all test cases.  The [sprinklersdfs.cpp](/2020_03Open/sprinklersdfs.cpp) is brute-force depth first search (DFS).  It could pass only the basic test case.  But it shows how we convert the dfs algorithm into powerful DP algorithm.
