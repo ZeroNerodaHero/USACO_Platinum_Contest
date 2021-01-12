@@ -11,7 +11,7 @@ In [sleep0.cpp](/2020_12Dec/sleep0.cpp), DP state (b, m, o) is defined as the nu
 
 This is also a dynamic programming.  The state dp(a,b,k) is defined as total number of sequences of rooms from a to b, but only involve pressing buttons with numbers at most k. Then we get the state transition formula which is similar to Floyd–Warshall algorithm.
  
-    dp(a, b, k) = dp(a, m, k-1) * dp(m, b, k-1) for all intermediate room m.
+    dp(a, b, k) = sum of dp(a, m, k-1) * dp(m, b, k-1) for all intermediate room m.
 
 In order to support all queries, the room number a and b in query is changed to (a+N) and (b+N).
 
