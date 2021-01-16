@@ -35,12 +35,8 @@ int main()
     for(int i = N-2; i > 0; i--){
         for(int j = 1; j < M-1; j++){
             if(g[i][j] == '#') continue;
-            if(g[i][j-1] == '#'){
-                id[i][j] = ++t;
-                q[t] = 1;
-            } else{
-                id[i][j] = t;
-            }
+            if(g[i][j-1] == '#'){ q[++t] = 1; } 
+            id[i][j] = t;
             if(g[i+1][j] == '.'){
                 int par = find(id[i+1][j]);
                 if(par != t){
@@ -56,12 +52,10 @@ int main()
     }    
 
     ll ans = 1;
-    while(t > 0){
-        int par = find(t); 
-        if(par == t){
+    for(;t>0; t--){
+        if(find(t) == t){
             ans = (ans * q[t])%P; 
         }
-        t--;
     }
     cout << ans << endl;
 }
