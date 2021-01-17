@@ -53,11 +53,14 @@ Thus the DP transition can be:
     a[i] included: dp[i][j] += sum(dp[i-1][k]) for all k<=j, where j=a[i];
 
 Actually we only need dp[K] to store the count.  In order to complete one query, it takes O(NK) time.  The total time comlexity is O(QNK).  You could not get full credit.  But the optimization is based on this DP transition.  Here is the code for one query [1,N].
+
+    <pre>
     dp[0] =1; 
     for (int i =1; i<=N; ++i) 
         for (int j = a[i]; j>= 0; --j) dp[a[i]] += dp[j];
     ans = 0; for(int j=0; j<=K; ++j) ans += dp[j];
-
+    </pre>
+    
 If we use matrix multiplication for DP transition, it can be expressed as a product of matrix.
 Thus we can maintain a prefix product of matrix and also the product of inverse matrix.  It takes O(NK<sup>3</sup>) to build the prefix product.  It takes O(QK<sup>2</sup>) to get the answer.
 
