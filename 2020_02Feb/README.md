@@ -10,7 +10,7 @@ In  [deleg.cpp](/2020_02Feb/deleg.cpp), I use STL vector to store the length of 
 
 ## 2. Equilateral Triangles
 
-In order to form a triangle with equal Manhattan distance, all the third points are in one 45-degree line for one horizontal or vertical side.  We first change **Manhattan distance** to **Chebyshev Distance**.  For one side (even number) on a squrare, the third point must lie in the opposite side of the sqaures. Then it is easy to count the number of triangles.  The counting can be done in two direction, but avoid over counting of the points in four corners of the square.  Use prefix sum to speed up the search, which can reduce the time complexity to O(N<sup>3</sup>).
+In order to form a triangle with equal Manhattan distance, all the third points are in one 45-degree line for one horizontal or vertical side.  If we first change **Manhattan distance** to **Chebyshev Distance**, for one side (even number) on a squrare, the third point must lie in the opposite side of the sqaures. Then it is easy to count the number of triangles.  The counting can be done in two direction, but avoid over counting of the points in four corners of the square.  Use prefix sum to speed up the search, which can reduce the time complexity to O(N<sup>3</sup>).
  
 As a lot of points have no cow in transitioned graph, we can do optimization by narrowing down the search range.  The [triangles.cpp](/2020_02Feb/triangles.cpp) is an improvement of [triangles1.cpp](/2020_02Feb/triangles1.cpp).
 
@@ -23,6 +23,6 @@ First sort segments by left coordinate, and try placing the segment [l,r] into a
 2. r > i, the complexity is not changed, but rightmost point of new subset is r.
 3. the complexity and rightmost point of this newly created subset is the same as old subset.
 
-If we use array for DP state, the time complexity will be (N<sup>2</sup>K).  As segment tree can support range query, single point update, and range update with lazy propagation, we store the DP state into segment tree.  As there are only N (not 2N) rightmost point, the segment tree range is [0,N].
+If we use array for DP state, the time complexity will be (N<sup>2</sup>K), which could not get full credit.  As segment tree can support range query, single point update, and range update with lazy propagation, we store the DP state into segment tree.  As there are only N (not 2N) rightmost point, the segment tree range is [0,N].  I use one array with 2N length to map any l or r value to be within [0,N].
 
 For polynomial expansion, we can do it on the fly instead of using pre-computed combination table.  Thus no mulitiplication is needed.
