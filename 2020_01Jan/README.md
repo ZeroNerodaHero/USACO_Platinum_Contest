@@ -88,10 +88,10 @@ Note: I just feel that there is still room to do optimization, or we could use d
 
 The y location of cow i is changed with time t as this line: y[i] = a[i] - i * t.  The journey length for cow i to word Qi is the **positive** t-coordinate of intersection of the two lines.  But cow i can jump to other world to make the journey shorter. Thus we need to find another world for a smallest t-coordinate of intersection if possible.  As all A[i] are distinct numbers, there are only two cases: A[Qi] < A[i] and A[Qi]> A[i].
 
-1.  In case of A[Qi] < Ai, we should find a world **j** falling faster than **max((i-1), Qi)** to catch Qi if possible. First we sort all Ai in decreasing order.  Then we maintain a set of worlds which fall faster.  Then we can do binary search to find j.  The answer is the t-coordinate of the intersection of line Qi and j.
+1.  In case of A[Qi] < A[i], we should find a world **j** falling faster than **max((i-1), Qi)** to catch Qi at earliest time if possible. First we sort all A[i] in decreasing order.  Then we maintain a set of worlds which fall faster in order.  When we add one world i, the last world is removed from the set if it is not faster than the world i. In addtion, if the last one in the set does not intersect with world i earlier than the previous one (small t-coordinate of intersection), remove it.  Then we can do binary search to find j in the same fasion.  The answer is the t-coordinate of the intersection of line Qi and j.
 
 2. In case of A[Qi] > Ai, we should find a world falling slower to wait for Qi.
 
-This is actually a greedy algorithm.  The [falling.cc](falling.cc) is somewhat similar to [Graham Scan Algorithm](https://github.com/ZeroNerodaHero/Competitive/blob/master/21-Convex-Hull/graham2.cpp) to build a convex hull.
+This is actually a greedy algorithm.  For case 1, we find that all the points in the set always construct a lower convex hull while they construct an upper convex hull in case 2.  The [falling.cpp](falling.cpp) is somewhat similar to [Graham Scan Algorithm](https://github.com/ZeroNerodaHero/Competitive/blob/master/21-Convex-Hull/graham2.cpp) to build a convex hull.
 
 
