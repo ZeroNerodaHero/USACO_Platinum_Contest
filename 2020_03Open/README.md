@@ -4,13 +4,11 @@
 
 **Transition line** is defined as a zigzag line, which moves only down and forward, to divide the whole field into two parts.  The corn sprinkler must be placed at the corner when it turns down while an alfalfa sprinkler must be placed at the corner where it turns forward.
 
-In [sprinklers.cpp](/2020_03Open/sprinklers.cpp) uses bottom-up dynamic programming.
+- In [sprinklers.cpp](sprinklers.cpp) uses bottom-up dynamic programming.
+- In [sprinklers0_dp_topdown.cpp](sprinklers0_dp_topdown.cpp) uses top-down DP.
+- In [prinklers_modint.cpp](sprinklers_modint.cpp) uses modular integer data structure.
 
-In [sprinklers0_dp_topdown.cpp](/2020_03Open/sprinklers0_dp_topdown.cpp) uses top-down DP.
-
-In [prinklers_modint.cpp](/2020_03Open/sprinklers_modint.cpp) uses modular integer data structure.
-
-All three program above can pass all test cases.  The [sprinklersdfs.cpp](/2020_03Open/sprinklersdfs.cpp) is brute-force depth first search (DFS).  It could pass only the basic test case.  But it shows how we convert the dfs algorithm into powerful DP algorithm.
+All three program above can pass all test cases.  The [sprinklersdfs.cpp](sprinklersdfs.cpp) is brute-force depth first search (DFS).  It could pass only the basic test case.  But it shows how we convert the dfs algorithm into powerful DP algorithm.
 
 
 ## 2. Exercise
@@ -34,7 +32,7 @@ In order to describe the algorithm, I first provide some defintions here:
 - **normalization/de-normalization**: In normalization state, vertex 1..K does not have free/fixed node but cows. In denomalization state, free node and fix node can be anywhere.
 
 #### Solution: 
-The tree can be treated as a graph of CCs which are connected with (or segmented by) visible chains.  Here are the steps to take:
+The tree can be treated as a graph of CCs which are connected with (or segmented by) visible chains.  Here are the steps to take in [circus.cpp](circus.cpp):
 
 1. Pick up one endpoint vertex, do a DFS to collect all the visible chains (c) and all the connected components (cc)
 2.  add free node one by one.  Recursively merge the connected componets (cc) until all becomes one, or until there is no visible chain.
@@ -56,20 +54,17 @@ The tree can be treated as a graph of CCs which are connected with (or segmented
 
 #### 2. Exercise
 
-[Permutation group]( https://en.wikipedia.org/wiki/Permutation_group)
-
-[Fermat's little theorem]( https://en.wikipedia.org/wiki/Fermat%27s_little_theorem)
-
+- [Permutation group]( https://en.wikipedia.org/wiki/Permutation_group)
+- LCM/GCD, [mobius inversion formula]( https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula), proset and [the principle of inclusion and exclusion](https://github.com/ZeroNerodaHero/Competitive/tree/master/61-Inclusion-Exclusion).
+- [Dirichlet convolution]( https://en.wikipedia.org/wiki/Dirichlet_convolution)
+- [Euler's totient function]( https://en.wikipedia.org/wiki/Euler%27s_totient_function) is a multiplicative function.
+- [Fermat's little theorem]( https://en.wikipedia.org/wiki/Fermat%27s_little_theorem) is based on Euler's theorem.
+- Sieve of Eratosthenes, Linear Sieve Of Euler, 
 
 #### 3. Circus
 
-[Discrete mathematics]( https://en.wikipedia.org/wiki/Discrete_mathematics)
-
-[Equivalent class : 等价类/isomorphism](https://en.wikipedia.org/wiki/Equivalence_class )
-
-[Union find]( https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
-
-
-
+- [Discrete mathematics]( https://en.wikipedia.org/wiki/Discrete_mathematics)
+- [Equivalent class : 等价类/isomorphism](https://en.wikipedia.org/wiki/Equivalence_class )
+- [Union find]( https://github.com/ZeroNerodaHero/Competitive/tree/master/40-Union-Find)
 
 
