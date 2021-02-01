@@ -16,6 +16,6 @@ Solutions to other two problems:
 
 The [Sum of Distances](http://usaco.org/index.php?page=viewproblem2&cpid=1092) is a very cool question.  During the contest, I realized that it is actually Dijkstra shortest path (SPF) problem.  But the vertex is a K-dimensioanl vector.  Every field in a vector vertex has its own rule to change in graph G[i].  There will be a lot of vertices in the connected graph starting from (0,0, ...0).
 
-The [1sum_bfs.cpp](2021_01Jan/1sum_bfs.cpp) is doing Dijkstra BFS traversal from this starting vertex.
+The [1sumbfs.cpp](2021_01Jan/1sum_bfs.cpp) is doing Dijkstra BFS traversal from this starting vertex.
 
 As the problem asks for the sum of all shortest distance, we can just define one rule to visit all the vector vertices.  The detail of [1sum.cpp](2021_01Jan/1sum.cpp) can be found [here](2021_01Jan/README.md).
