@@ -1,7 +1,7 @@
 # USACO_Platinum_Contest
-### Solutions to USACO Platinum problems.
+## Solutions to USACO Platinum problems.
 
-#### New Concept Introduced
+### 1. New Concept Introduced
 
 At Platinum level, I have to define new concepts sometimes. In Circus (USACO 2020 Open) problem, new definitions are given for virtual connected component and chain in order to describe my algorithm. The connected component (CC) is somewhat similar to but also different from connected component in graph.  It defines one domain where two cows could swap their positions.  The chain is like one weighted edge in tree or graph, which connects but also segments CCs. Similar to Boruvka’s algorithm, the algorithm is to merge CCs by removing or hiding chains when there are enough unoccupied vertices.  Here is the detailed description.
 
@@ -12,7 +12,7 @@ Solutions to other two problems:
 - [2020_03Open/Exercise](/2020_03Open/README.md#2-exercise)
 - [2020_03Open/Sprinklers 2: Return of the Alfalfa](/2020_03Open/README.md#1-sprinklers-2-return-of-the-alfalfa)
 
-#### Modification of sophisticated Algorithm
+### 2. Modification of Existing Algorithms
 
 The [Sum of Distances](http://usaco.org/index.php?page=viewproblem2&cpid=1092) is a very interesting question.  During the contest, I realized that it is actually Dijkstra shortest path (SPF) problem.  But the vertex is a K-dimensional vector.  Every field in a vector vertex has its own rule to change in graph G[i].  There will be a lot of vertices in the connected graph starting from (0,0, ...0).  The key point is to find which vector vertex in G is visited.
 
@@ -20,15 +20,9 @@ The [1sumbfs.cpp](2021_01Jan/1sumbfs.cpp) is doing Dijkstra BFS traversal from t
 
 As the problem asks for the sum of all shortest distance, I defined one rule to visit all the vector vertices.  The detail of [1sum.cpp](2021_01Jan/1sum.cpp) can be found [here](2021_01Jan/README.md#1-sum-of-distances).
 
-#### Dynamic Programming vs. Generating Function
+### 3. Dynamic Programming vs. Generating Function
 
-The generating function is helpful to find the DP transition formula, or make DP unnecessary.  But it needs advanced mathmatics knowlege.
-
-For [Tree Depth, USACO 2019 December Contest, Platinum](http://www.usaco.org/index.php?page=viewproblem2&cpid=974), the solution is usually based on generating function of permutation statistics.
-
-Here I provide one DP solution.
-
-First the DP state is defined as follows:
+The generating function is helpful to find the DP transition formula, or make DP unnecessary.  But it needs advanced mathmatics knowlege. For [Tree Depth, USACO 2019 December Contest, Platinum](http://www.usaco.org/index.php?page=viewproblem2&cpid=974), the solution is usually based on generating function of permutation statistics.  Here I provide one DP solution.  First the DP state is defined as follows:
 
     dp[n][k]: the total number of k inversions for all permutation with n objects.
 
