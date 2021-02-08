@@ -18,22 +18,24 @@ The [Sum of Distances](http://usaco.org/index.php?page=viewproblem2&cpid=1092) i
 
 The [1sumbfs.cpp](2021_01Jan/1sumbfs.cpp) is doing Dijkstra BFS traversal from this starting vertex.  The hash table is used to check which vector vertex is visited.
 
-As the problem asks for the sum of all shortest distance, I defined one rule to visit all the vector vertices.  The detail of [1sum.cpp](2021_01Jan/1sum.cpp) can be found [here](2021_01Jan/README.md#1-sum-of-distances).
+As the problem asks for the sum of all shortest distance, I defined one rule to visit all the vector vertices: never go back.  The detail of [1sum.cpp](2021_01Jan/1sum.cpp) can be found [here](2021_01Jan/README.md#1-sum-of-distances).
 
 ### 3. Dynamic Programming vs. Generating Function
 
-The generating function is helpful to find the DP transition formula, or make DP unnecessary.  But it needs advanced mathmatics knowlege. For [Tree Depth, USACO 2019 December Contest, Platinum](http://www.usaco.org/index.php?page=viewproblem2&cpid=974), the solution is usually based on generating function of permutation statistics.  Here I provide one DP solution.  First the DP state is defined as follows:
+The generating function is helpful to find the DP transition formula, or make DP unnecessary.  But not any DP transition can be deducted from generating function. For [Tree Depth, USACO 2019 December Contest, Platinum](http://www.usaco.org/index.php?page=viewproblem2&cpid=974), the solution is usually based on generating function of permutation statistics.  Here I provide one DP solution.
+
+First the DP state is defined as follows:
 
     dp[n][k]: the total number of k inversions for all permutation with n objects.
 
-Now we add the number n to the permuation of n-1 objects.  There are n position which we can insert the nth object.  If we append it at the end, it add 0 inversion.  WLOG assumes that there are n-1-i inversions more if nth object is added at position i.  Thus we get the DP transition fomula as follows:
+Now we add the number n to the permuation of n-1 objects.  There are n position which we can insert the nth object.  If it is appended at the end, it adds 0 more inversion.  WLOG assumes that there are n-1-i more inversions if nth object is added at position i.  Thus we get the DP transition formula as follows:
 
     dp[n][k] = sigma(dp[n-1][k-i]) for i=[0, min(n-1, k)]
 
-The k could be very big, but it is not over n(n-1)/2.  If k is big than this number, dp[n][k] = 0, which has no conflict with generating function.  So we can have the following initialization for DP table.
+The k could be very big, but it is not over n(n-1)/2.  If k is big than this number, dp[n][k] = 0.  So we can have the following initialization for DP table.
 
     dp[2][0] = 1, dp[2][1] =1, but dp[2][2] = 0.
 
-For K inversion, I only care about (K-i) number of inversion at dp[n-1] level.  So the space complexity is only O(N<sup>2</sup>).  But the time complexity is still  O(N<sup>3</sup>).
+For K inversions, we only care about (K-i) number of inversion at dp[n-1] level, which is a part of prefix sum.  So the time complexity is still O(NK) or O(N<sup>3</sup>).
 
 

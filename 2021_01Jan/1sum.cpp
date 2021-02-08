@@ -19,6 +19,7 @@ set<int> ba[MX][2], fw[MX][2],cb[MX];
 
 int main()
 {
+    cin.tie(0)->sync_with_stdio(0);
     cin >> K;
     int u=0, z; 
     for(int i = 0; i<K; ++i) {

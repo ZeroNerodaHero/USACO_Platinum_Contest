@@ -13,7 +13,9 @@ All three program above can pass all test cases.  The [sprinklersdfs.cpp](sprink
 
 ## 2. Exercise
 
-Every permutation can be partitioned into permutation group(s) of sizes c1,c2,c3,…,ck such that c1+c2+…+ck<=N.  The minimum steps to return to the same order is actually lcm(c1,c2,…,ck).  Any composite number can be factorized into multiples of primes or prime power.If we can count the number of prime factors by using stirling number, we can get the answer by multiplying all the prime factors together.
+Every permutation can be partitioned into permutation group(s) of sizes c1,c2,c3,…,ck such that c1+c2+…+ck==N.  The minimum steps to return to the same order is actually lcm(c1,c2,…,ck).  Any composite number can be factorized into multiples of primes or prime power.If we can count the number of prime factors by using dynamic programming, we can get the answer by multiplying all the prime factors together.
+
+There is optimization here.  We can add the number of same prime and prime power together before doing modp operation. As there are about 500 primes in this case, we can see only a little improvement.
 
 ## 3. Circus
 
@@ -43,28 +45,20 @@ The tree can be treated as a graph of CCs which are connected with (or segmented
 - Early exit: when there are enough CCs to do the exchanges, we can stop as all answers are 1.
 
 
-
-
-
 ## References:
 
 #### 1. Sprinklers 2: Return of the Alfalfa
 
-[Modular multiplicative inverse]( https://en.wikipedia.org/wiki/Modular_multiplicative_inverse)
+- [Modular multiplicative inverse]( https://en.wikipedia.org/wiki/Modular_multiplicative_inverse)
 
 #### 2. Exercise
 
-- [Permutation group]( https://en.wikipedia.org/wiki/Permutation_group)
-- LCM/GCD, [mobius inversion formula]( https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula), proset and [the principle of inclusion and exclusion](https://github.com/ZeroNerodaHero/Competitive/tree/master/61-Inclusion-Exclusion).
-- [Dirichlet convolution]( https://en.wikipedia.org/wiki/Dirichlet_convolution)
-- [Euler's totient function]( https://en.wikipedia.org/wiki/Euler%27s_totient_function) is a multiplicative function.
-- [Fermat's little theorem]( https://en.wikipedia.org/wiki/Fermat%27s_little_theorem) is based on Euler's theorem.
-- Sieve of Eratosthenes, Linear Sieve Of Euler, 
+- [Mathmatics Knowledge](../Math.md)
 
 #### 3. Circus
 
 - [Discrete mathematics]( https://en.wikipedia.org/wiki/Discrete_mathematics)
-- [Equivalent class : 等价类/isomorphism](https://en.wikipedia.org/wiki/Equivalence_class )
+- [Equivalent class / isomorphism](https://en.wikipedia.org/wiki/Equivalence_class )
 - [Union find]( https://github.com/ZeroNerodaHero/Competitive/tree/master/40-Union-Find)
 
 

@@ -8,7 +8,7 @@ typedef long long ll;
 #define MOD2(x) if(x>=P) x%=P
 
 struct node { 
-    int x,y,i;
+    int x,y;
     bool operator <(const node &o) const {
         return (y<o.y);
     }
@@ -48,7 +48,7 @@ int main()
     cin >> N >> M;
     for (int i = 1; i<= M; ++i) cin >> c[i];
     cin>> Q; 
-    for (int i = 1; i<= Q; ++i) {cin >> t[i].x>>t[i].y;t[i].i=i;cnt[t[i].y]++;}
+    for (int i = 1; i<= Q; ++i) {cin >> t[i].x>>t[i].y;cnt[t[i].y]++;}
     //sort(t+1, t+Q+1);
     cnt_sort();
     ok[0].x=ok[0].y=1;
@@ -57,10 +57,10 @@ int main()
         int q = m[i];
         if (t[q].y<y) {
             if(t[q].x>=ok[b].x) {
-                ans[t[q].i] = ok[b].v + c[t[q].y]*(t[q].x-ok[b].x);
+                ans[q] = ok[b].v + c[t[q].y]*(t[q].x-ok[b].x);
                 i++;continue;
             }
-            int l = 0, r = b, m;
+            int l = 0, r = b-1, m;
             while(l<r) {
                 m=(l+r+1)/2;
                 if (t[q].x >=ok[m].x) {
@@ -69,7 +69,7 @@ int main()
                     r = m-1;
                 }
             }
-            ans[t[q].i] = dist(ok[l], t[q].x, t[q].y);
+            ans[q] = dist(ok[l], t[q].x, t[q].y);
             i++;continue;
         }
 
