@@ -32,8 +32,10 @@ Now we add the number n to the permuation of n-1 objects.  There are n position 
 
     dp[n][k] = sigma(dp[n-1][k-i]) for i=[0, min(n-1, k)]
 
-The k could be very big, but it is not over n(n-1)/2.  If k is big than this number, dp[n][k] = 0.  So we can have the following initialization for DP table.
+The k could be very big, but it is not over n(n-1)/2.  If k is big than this number, dp[n][k] = 0.  So we can have the following values for DP table.
 
+    dp[0][0] = 1, but dp[0][1]=0
+    dp[1][0] = 1, but dp[1][1]=0
     dp[2][0] = 1, dp[2][1] =1, but dp[2][2] = 0.
 
 For K inversions, we only care about (K-i) number of inversion at dp[n-1] level, which is a part of prefix sum.  So the time complexity is still O(NK) or O(N<sup>3</sup>).

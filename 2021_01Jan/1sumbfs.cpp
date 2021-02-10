@@ -6,7 +6,7 @@ const unsigned int MX1 = 100002;
 typedef vector<int> VI;
 typedef pair<int, int> PI;
 const int P = 1e9+7;
-typedef unsigned long long ull;
+typedef long long ll;
 #define MOD(x) if(x>=P) x-=P
 #define MOD2(x) if(x>=P) x%=P
 
@@ -51,13 +51,13 @@ void dfs(int k, string ha)
 int main()
 {
     cin >> K;
-    int u=0, v=1, z; 
+    int u=0, v=1, z;
     for(int i = 0; i<K; ++i) {
         cin >> n[i]>>z;
         VI* f = g+u;
         sum[i] = u, prd[i]=v;
         for (int j =0; j<z; ++j) {
-            int a, b; 
+            int a, b;
             cin >> a>>b;a--, b--;
             f[a].push_back(b);
             if(b!=a) f[b].push_back(a);

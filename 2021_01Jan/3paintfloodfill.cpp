@@ -29,7 +29,7 @@ int find(int x)
 }
 
 int solve(int x, int y, int x2, int y2);
-char b[MX][MX], bx[MX][MX], by[MX][MX], e[MX*MX];
+char b[MX][MX], e[MX*MX];
 int s[MX][MX];
 
 int dx[4] = {0,1,0,-1};
@@ -53,9 +53,8 @@ int flood(int c, int d){
             if(nx >= x && ny >= y && nx <= x2 && ny <= y2
                 && v[nx][ny] != u && a[nx][ny] == ch){
                 v[nx][ny] = u;
-                if(nx == x || nx == x2 || ny == y || ny == y2){
-                } else{
-                    if(b[nx][ny] == 1) t= 0;    
+                if(!(nx == x || nx == x2 || ny == y || ny == y2)){
+                    if(b[nx][ny] == 1) t= 0;
                 }
                 q.push(PI(nx,ny));
             }
@@ -67,17 +66,17 @@ int flood(int c, int d){
 void doit()
 {
     int t = solve(1,1,N,M);
-    
+
     for(int i=1; i<=N; ++i) {
     for(int j=1; j<=M; ++j) {
         id[i][j] = find(id[i][j]);
-        if(!e[id[i][j]]) e[id[i][j]]=1, b[i][j]=1; 
+        if(!e[id[i][j]]) e[id[i][j]]=1, b[i][j]=1;
     }
     }
 
     for (int i=1; i<=N; i++) {
-    for (int j=1; j<=M; j++) 
-        s[i][j] = s[i-1][j] + s[i][j-1] 
+    for (int j=1; j<=M; j++)
+        s[i][j] = s[i-1][j] + s[i][j-1]
                 - s[i-1][j-1] + b[i][j];
 	}
     for (int k = 1; k< C; ++k) {

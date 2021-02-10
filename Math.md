@@ -27,7 +27,7 @@ I am going to learn the following mathmatics topics.
 
 #### Planar Graph
 
-- [Euler's Formula](https://www.youtube.com/watch?v=5ywif1Zpeo4): v-e+f=2.
+- [Euler's Formula](https://www.youtube.com/watch?v=5ywif1Zpeo4): v-e+f=1+1 for c=1.
 - The Four Color Theorem
 - Maximal planar graph
 

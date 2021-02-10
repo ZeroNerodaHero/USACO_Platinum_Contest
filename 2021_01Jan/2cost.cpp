@@ -7,7 +7,7 @@ typedef long long ll;
 #define MOD(x) if(x>=P) x-=P
 #define MOD2(x) if(x>=P) x%=P
 
-struct node { 
+struct node {
     int x,y;
     bool operator <(const node &o) const {
         return (y<o.y);
@@ -47,7 +47,7 @@ int main()
     cin.tie(0)->sync_with_stdio(0);
     cin >> N >> M;
     for (int i = 1; i<= M; ++i) cin >> c[i];
-    cin>> Q; 
+    cin>> Q;
     for (int i = 1; i<= Q; ++i) {cin >> t[i].x>>t[i].y;cnt[t[i].y]++;}
     //sort(t+1, t+Q+1);
     cnt_sort();

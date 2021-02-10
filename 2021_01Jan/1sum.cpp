@@ -21,13 +21,13 @@ int main()
 {
     cin.tie(0)->sync_with_stdio(0);
     cin >> K;
-    int u=0, z; 
+    int u=0, z;
     for(int i = 0; i<K; ++i) {
         cin >> n[i]>>z;
         VI* f = g+u;
         sum[i] = u;
         for (int j =0; j<z; ++j) {
-            int a, b; 
+            int a, b;
             cin >> a>>b;a--, b--;
             f[a].push_back(b);
             if(b!=a) f[b].push_back(a);
@@ -68,9 +68,9 @@ int main()
         ll p = 1;
         for (int k = 0; k<K; ++k) {
             p*= ba[k][b].size(); MOD2(p);
-            cc[b]*= (ba[k][b].size() + ba[k][a].size() - cb[k].size()); MOD2(cc[b]); 
+            cc[b]*= (ba[k][b].size() + ba[k][a].size() - cb[k].size()); MOD2(cc[b]);
         }
-        
+
 
         ll tt = p - dc[b] -(cc[b]-cc[a]) + P * 2;
         tt = tt * l + ans; MOD2(tt);
