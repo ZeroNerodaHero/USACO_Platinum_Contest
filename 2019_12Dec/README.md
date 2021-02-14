@@ -35,8 +35,9 @@ For range update, lazy propogation must be used.  Even though time complexity re
 
 ## 3. Tree Depth
 
-For permutation with inversion K, we can get the number of permutation by using the generating function.
-    g(n) = product (sigma(x<sup>i</sup>) for i=0, k-1) for k=1, n
+For permutation with inversion K, we can get the number of permutation by using the generating function. Here we define the generating function as follows.  The g(0,n) is the generating function of permuation with n objects.
+
+    g(s, n) = product (sigma(x<sup>i</sup>) for i=0, k-1) for k=s, n
 
 We can also use Dynamic Programming (DP) to get the number of permutation.  The DP state is defined as the number of permuation with k inversion for the first n objects.
 
@@ -44,11 +45,24 @@ We can also use Dynamic Programming (DP) to get the number of permutation.  The 
 
 We introduce dp1[n][k], which represents the number of permuation with k inversion for last n objects in total N objects.
 
-As the problem asks for permutation with inversion K, we only need to compute the number of permutation with inversion from 0 to K.  And one hidden prefix sum is used to speed up the counting.
+As the problem asks for permutation with inversion K, we only need to compute the number of permutation with inversion from max(0,K-N) to K.  And one hidden prefix sum is used to speed up the counting.
 
-After we get dp[N][K] value, now we consider the depth.  We still use the generating function.  The necessary and sufficient condition is that j is an ancestor of i if a[j]=min(a[i…j]). Just like DP, we add the object from small to big.  For a[i], adding a[j] contributes j−i inversions regardless of how many inversions a[i…j−1] has.
+Now we consider the depth.  We still use the generating function.  The necessary and sufficient condition is that j is an ancestor of i if a[j]=min(a[i…j]). Just like DP, we add the object from small to big.  For a[i], adding a[j] contributes j−i inversions regardless of how many inversions a[i…j−1] has.
 
+    G(n) = g(0, i) * g(i+1, n)
 
+This looks like a backpack of prefix and suffix.  Here we define the state for g(0,i) and g(i+1,n) as follows:
 
+    dp[n][k] : first n objects with k inversion
+    dp1[n][k] : last n objects with k inversion
+
+As we only care permutation with K inversion, the convolution of i items only needs to do selected items like this:
+
+    a[i] = sum(dp[i-1][j]*dp1[i+1][K-j])          only compute K items
+    b[i] = sum(dp[i-1][j]*dp1[i+1][K-(i-1)-j])    only compute K-(i-1) items
+
+After that, we can use prefix sum to speed up the computation of answer.  
+
+    *Note: The index is in the range of[1,N] so that we can ignore any check of i=>0 or i<=N.*
 
 
