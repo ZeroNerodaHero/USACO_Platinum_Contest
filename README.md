@@ -40,4 +40,10 @@ The k could be very big, but it is not over n(n-1)/2.  If k is big than this num
 
 For K inversions, we only care about (K-i) number of inversion at dp[n-1] level, which is a part of prefix sum.  So the time complexity is still O(NK) or O(N<sup>3</sup>).
 
+### 4. Vague Definition
+
+Sometimes we have to convert vague defintion to clear defintion.
+
+For example, in [Sprinklers 2](2020_03Open/sprinklers.cpp), the transition line is above the read block or on the left side of blue block. It is not exactly at one point (i, j).  Another example is [Out of Sorts](2018_03Open/sort.cpp).  The partition point is between i and i+1, not at i or i+1. For these cases, the clear definition must be provided to complete the computation.
+
 

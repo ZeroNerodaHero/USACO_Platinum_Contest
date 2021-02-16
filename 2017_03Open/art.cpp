@@ -15,7 +15,7 @@ void cio(string fname){
 
 int N, M;
 int x[MX1],y[MX1],x2[MX1],y2[MX1];
-int m[MX1],v[MX1],s[MX1];
+int m[MX1],v[MX1];
 int a[MX][MX],p[MX][MX];
 
 int main(){
@@ -61,13 +61,13 @@ int main(){
         for(int j = 1; j <= N; j++){
             if(a[i][j] == 0) continue;
             if(p[i][j] > 1){
-               s[a[i][j]] = 1; 
+               v[a[i][j]] = 0; 
             }
         }
     }
-    int ans = 0;
-    for(int i = 1; i <= N * N; i++) {
-        if(s[i] == 0) ans++;
+    int ans = N*N-M;
+    for(int i = 0; i < M; i++) {
+        if(v[m[i]] == 1) ans++;
     } 
     cout << ans << endl;
 }
