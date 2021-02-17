@@ -20,7 +20,7 @@ In [1sum.cpp](1sum.cpp), set or BST is used for duplicate removal and counting. 
 
 ## 2. Minimum Cost Paths
 
-The DP optimization is done by using the piecewise interval to narrow down the search.  The intervals are created by a set of **"best points"**.  The **best point** is defined as the point to which other point with greater (or equal) y-cooridinate will reference, for example, (1,1,0) is the **first best point**.  The minimum cost of point x after **best point f** is deducted from the formula as follows:
+The DP optimization is done by using the piecewise interval to narrow down the search.  The intervals are created by a set of **"best points"**.  The **best point** is defined as the point to which other point with greater (or equal) y-cooridinate will reference, for example, (1,1,0) is the **first best point**.  The minimum cost of point x after **best point f** is deduced from the formula as follows:
 
     minimum-cost-path(x, y) = f.v + x*x*(y-f.y) + c[f.y]*(x-f.x)
 

@@ -13,12 +13,15 @@ void cio(string fname){
 }
 
 int N, M, K, Q;
-pair<int, PI> e[MX];  
-vector<PI> g[MX];
-int t[MX];
-map<int,set<int> > m[MX];
-set<int> ans, best[MX];
-int p[MX], c[MX], f[MX], l[MX],l1[MX];
+pair<int, PI> e[MX];
+int c[MX], f[MX], l[MX], ans[MX];
+
+// record query on each node
+// last query, last color, prev/next query in this node
+struct node {
+    int l, c, p, n;
+};
+vector<node> q[MX];
 
 int find(int x){
     if(f[x] == 0){
@@ -34,25 +37,23 @@ void Krusal(){
         int pu = find(u), pv = find(v);
         if(pu != pv){
             f[pu] = pv;
-            e[j] = e[i];
-            g[u].push_back(PI(v,j));
-            g[v].push_back(PI(u,j));
-            j++;
+            e[j++] = e[i];
         }
-    }   
+    }
 }
 
-void dfs(int x, int y){
-    p[x] = y;
-    for(auto i: g[x]){
-        if(i.first != y){
-            t[x]++;
-            l[i.second] = i.first;
-            l1[i.first] = i.second;
-            m[x][c[i.first]].insert(i.second);
-            dfs(i.first, x);
+void skip(int x, int v){
+    int p = q[x][v].p, n = q[x][v].n, t = find(q[x][v].l);
+
+    // try to skip query v
+    if(q[x][n].l <= t) {
+        q[x][p].n = n;
+        q[x][n].p = p;
+        if(q[x][p].c == q[x][n].c) { //skip same color
+             q[x][p].n = q[x][n].n;
+             q[x][q[x][p].n].p = p;
         }
-    }    
+    }
 }
 
 int main(){
@@ -66,61 +67,38 @@ int main(){
     }
     sort(e,e+M);
     Krusal();
-    dfs(1,0);
-    for(int i = 1; i <=N; i++){
-        if(t[i] == 0) continue;
-        for(auto j : m[i]){
-            best[i].insert(*j.second.begin());
-        }
-        auto j = best[i].begin();
-        if(c[i] == c[l[*j]]) j++;
-        if(j != best[i].end()){
-            f[i] = *j;
-            ans.insert(*j);
-        } else f[i]= -1;
-    }
 
-
-    while(Q--){
-        int a,b,b1;
+    for(int i = 1, a, b; i <= Q; i++) {
         cin >> a >> b;
-        b1 = c[a];
-        c[a] = b;
-
-        if(p[a]){
-            int i = p[a];
-            int j = l1[a];
-
-            best[i].erase(*m[i][b1].begin());
-            m[i][b1].erase(j);
-            if(m[i][b1].size() > 0) best[i].insert(*m[i][b1].begin());
-            else m[i].erase(b1);
-    
-            if(m[i][b].size() > 0){
-                best[i].erase(*m[i][b].begin());
-            }
-            m[i][b].insert(j);
-            best[i].insert(*m[i][b].begin());
-            
-            if(f[i]>=0) ans.erase(f[i]);
-            auto k = best[i].begin();
-            if(c[i] == c[l[*k]]) k++;
-            if(k != best[i].end()) {
-                f[i] = *k;
-                ans.insert(*k);
-            } else f[i] = -1;
-        }
-
-        if(t[a]){
-            if(f[a]>=0) ans.erase(f[a]);
-            auto j = best[a].begin();
-            if(c[a] == c[l[*j]]) j++;
-            if(j != best[a].end()) {
-                f[a] = *j;
-                ans.insert(*j);
-            } else f[a] = -1;
-
-        }
-        cout << e[*ans.begin()].first << endl;
+        int s = q[a].size();
+        q[a].push_back((node){l[a], c[a], s-1, s+1});
+        c[a] = b; l[a] = i; f[i] = 0;
     }
+
+    for(int i = 1; i <= N; i++) {
+        int s = q[i].size();
+        q[i].push_back((node){l[i], c[i], s-1, s+1});
+        q[i].push_back((node){Q+1, 0, 0, 0});
+    }
+    f[Q+1] = 0;
+    int tt = 0; //early exit
+    for(int i = 0; tt<Q; i++) {
+        int u = e[i].second.first, v = e[i].second.second;
+        for(int j = find(1), a=0, b=0; j <= Q; j = find(j)) {
+            for(int n = q[u][a].n; q[u][n].l <= j; n = q[u][n].n) a = n;
+            for(int n = q[v][b].n; q[v][n].l <= j; n = q[v][n].n) b = n;
+
+            if(q[u][a].c != q[v][b].c){
+                ans[j] = e[i].first;
+                f[j] = j+1;
+                tt++;
+            } else {
+                j = min(q[u][q[u][a].n].l, q[v][q[v][b].n].l);
+            }
+            skip(u,a);
+            skip(v,b);
+        }
+    }
+
+    for(int i = 1; i <= Q; i++) cout << ans[i] << endl;
 }
