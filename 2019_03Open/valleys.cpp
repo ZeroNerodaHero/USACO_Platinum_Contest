@@ -29,6 +29,7 @@ int find(int x){
 
 void merge(int x, int p){
     x = find(x);
+    E[p]++;
     if(p != x){
         f[x] = p;
         V[p] += V[x];
@@ -56,10 +57,10 @@ int main(){
         int y = d[i].second.second;
         int c = id[x][y];
         v[x][y] = 1;
-        if(v[x-1][y]) E[c]++, merge(id[x-1][y],c);
-        if(v[x][y-1]) E[c]++, merge(id[x][y-1],c);
-        if(v[x+1][y]) E[c]++, merge(id[x+1][y],c);
-        if(v[x][y+1]) E[c]++, merge(id[x][y+1],c);
+        if(v[x-1][y]) merge(id[x-1][y],c);
+        if(v[x][y-1]) merge(id[x][y-1],c);
+        if(v[x+1][y]) merge(id[x+1][y],c);
+        if(v[x][y+1]) merge(id[x][y+1],c);
         
         if(v[x-1][y] && v[x][y-1] & v[x-1][y-1]) C[c]++;
         if(v[x+1][y] && v[x][y-1] & v[x+1][y-1]) C[c]++;

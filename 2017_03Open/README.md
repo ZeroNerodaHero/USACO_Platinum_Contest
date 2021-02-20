@@ -39,7 +39,7 @@ Here is the algorithm:
 - 4. After, process the queries and merge it.
 - 5. Loop to step 2
 
-I use the same disjoint set in MST algorithm to skip the processed query.  I also uses the doubly linked (p,n) list to skip the query for each node.  There are still room for optimization.
+I use the same disjoint set in MST algorithm to skip the processed query.  I also used the doubly linked (p,n) list to skip the query for each node.  There are still room for optimization.
 
 - Early exit: If all the Q queries are answered, it is done.
 
