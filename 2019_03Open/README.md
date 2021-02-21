@@ -2,7 +2,54 @@
 
 ## 1. Tree Boxes
 
+The problem has two sub-tasks:
+
+- Any tree path can be covered by one or two axis-aligned rectangles.
+- Embed the tree in a 2-D plane
+
+Any tree and its subtrees can be split into two parts such that both parts consist of a vertical chain in the tree.  Assume C is LCA(A,B), then any arbitrary path from A to B can be split into one path from A to C and the other path from B to its ancestor that is one level below C. If C=B, there will be only one path.
+
+For second task, we can put the root at (1,1).  Then recursively put the subtrees in the squares, which are on the diagonal from left to right, or (2,N) to (N,2).  I wrote one demo program to show the embedded tree on 2-D plane and the result of query.
+
+Visual of the tree created from [sample input](treeboxinput)
+<pre>
+    0         
+             3
+         2    
+            8 
+           7  
+          9   
+     1        
+        5     
+       4      
+      6
+</pre>
+
+Visual of the query of farms 4-7:
+<pre>
+    +***      
+    *  *     3
+    *  * +**  
+    *  * * *8 
+    *  * **-  
+    *  *  9   
+    *1 *      
+    *  *5     
+    ***-      
+      6 
+</pre>
+
+
+USACO official solution uses an array to store the ancestors, which degrades the performance.  If we change the order of ancestors, it could improve the performance. The [optimized solution](treeboxoptim.cpp) uses binary search to find LCA and trims the graph to a tree.
+
+We can also put all the squares in the diagonal from right to left.  The root should be at point (N, N) in this case.
+
+
 ## 2. Compound Escape
+
+This problem can be solved with PLUG DP.  I use the same way as I solved [van.cpp](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.1/van.cpp) and [betsy.cpp](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.5/betsy.cpp).
+
+As this problem is not a hamiltonian path, the state is different. The state is the set of connected components. When we have the same state, we need to choose the minimum cost.  If costs are the same, just add the count to the state.
 
 ## 3.  Valleys
 

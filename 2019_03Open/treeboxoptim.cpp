@@ -99,7 +99,7 @@ void setup(){
 }
 void print(){
     for(int i = 1; i <= N; i++){
-        cout << (g2[i]+1) << endl;
+        cout << '\t' << (g2[i]+1) << endl;
     }   
     cout << endl;
 }
