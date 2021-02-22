@@ -11,7 +11,7 @@ I am going to learn the following mathmatics topics.
 
 
 ## 2. Discrete mathematics
- 
+
 - [Discrete mathematics](https://en.wikipedia.org/wiki/Discrete_mathematics)
 
 #### Generating Functions
@@ -20,7 +20,7 @@ I am going to learn the following mathmatics topics.
 - Linear Recurrence Equation: Fibonacci sequence
 
 
-#### Inclusion-Exclusion Principle 
+#### Inclusion-Exclusion Principle
 
 - [The Principle of Inclusion and Exclusion](https://github.com/ZeroNerodaHero/Competitive/tree/master/61-Inclusion-Exclusion).
 - [The Pigeon Hole Principle](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/counting/tp10-1/)
@@ -32,7 +32,9 @@ I am going to learn the following mathmatics topics.
 - Maximal planar graph
 
 
-## 3. Permutation group
+## 3. Abstract Algebra
+
+#### Permutation group
 
 - [Permutation group]( https://en.wikipedia.org/wiki/Permutation_group)
 - [permutation cycle](https://www.ucl.ac.uk/~ucahmto/0007_2021/1-3-permutations.html#cycles)
@@ -69,7 +71,7 @@ I am going to learn the following mathmatics topics.
 - Discrete convolution
 - [Dirichlet convolution]( https://en.wikipedia.org/wiki/Dirichlet_convolution)
 
-#### Möbius inversion formula 
+#### Möbius inversion formula
 
 - [Möbius inversion formula](https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula)
 - LCM/GCD
@@ -81,4 +83,14 @@ I am going to learn the following mathmatics topics.
 - Linear Sieve, or Euler Sieve
 - Extended Eratosthenes Sieve
 
+## 5. Differential Geometry
 
+- Differential calculus vs. Integral calculus
+- Linear algebra : vector, matrix
+- Multilinear algebra : p-vector or multivector
+
+####  Euler characteristic
+
+- Euler's Formula : v-e+f=2
+- Gauss–Bonnet theorem
+- Gauss-Kronecker curvature of a hypersurface

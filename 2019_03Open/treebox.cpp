@@ -102,17 +102,19 @@ void setFarmLocation(int ID, int X, int Y){
 }
 void addBox(int X1, int Y1, int X2, int Y2){
     cout << X1 << ' ' << Y1 << ' ' << X2 << ' ' << Y2 << endl;
+    char u = g2[X1][Y1];
+    char v = g2[X2][Y2];
     int ax = min(X1,X2), bx = max(X1,X2);
     int ay = min(Y1,Y2), by = max(Y1,Y2);
     for(int i = ax; i <= bx; i++){
-        g2[i][ay]= g2[i][by] = '*';
+        g2[i][ay]= g2[i][by] = '.';
     }
     for(int i = ay; i <= by; i++){
-        g2[ax][i]= g2[bx][i] = '*';
+        g2[ax][i]= g2[bx][i] = '.';
     }
 
-    g2[X1][Y1] = '+';
-    g2[X2][Y2] = '-';
+    g2[X1][Y1] = u;
+    g2[X2][Y2] = v;
 }
 
 int main(){
