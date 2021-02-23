@@ -2,12 +2,16 @@
 
 using namespace std;
 const int MX = 30005;
+const int MXS = 160;
+const int MXH = (1<<18);
 typedef long long ll;
 typedef pair<ll, int> PI;
 typedef vector<int> VI;
 
 #define P 1000000007
 #define MOD(x) if(x>=P) x-=P
+#define OO(x) x
+#define OP(x)
 
 void cio(string fname){
     ios_base::sync_with_stdio(0); cin.tie(0);
@@ -15,167 +19,139 @@ void cio(string fname){
     freopen((fname+".out").c_str(),"w",stdout);
 }
 
-int N, K, a, b, row;
-int lc[MX][6], dc[MX][6];
-unordered_map<int, PI> m[2];
-char f[12];
-int const state = (0x543210);
+int hs[MXH];
+int N, K, C;
+int lc[MX][8], dc[MX][8];
+ll cost[2][MXS];
+int cnt[2][MXS];
 
-void print(){
-    for(auto i : m[b]){
-        cout << hex << i.first << ": " << i.second.first << ' ' << i.second.second << endl;
-    } cout << endl;
-}
-void print2(){
-    for(int i = 1; i <= N; i++){
-        for(int j = 0; j < K; j++){
-            cout << lc[i][j] << ' ';
-        }   cout << endl;
-        for(int j = 0; j < K; j++){
-            cout << dc[i][j] << ' ';
-        }   cout << endl;
-    } cout << endl;
-}
-void prt(char a[], int sz)
+int st[MXS][8], v[MXS];
+int tx[MXS][8][2][2];
+char c[8], t[8], f[8], q[MXS][8];
+
+#if 0
+void print(int a[], int b)
 {
-    for(int i = 0; i <sz; i++) cout << int(a[i]) << ' ';cout << endl;
+    for (int i=0; i<=b;++i) cout << a[i]<<' ';cout << endl;
 }
 
-char find(char x){
-    if(x == f[x]) return x;
-    return find(f[x]);
-}
+#endif
 
-int C;
-char c[8], t[8], id[16];
-ll* pt;
-int encode()
+void dfs(int k, int s)
 {
-    pt = (ll*) id;
-    *pt++ = -1;
-    *pt = -1;
-    for(int i = 0; i < K; i++){
-        if(id[t[i]] == -1) id[t[i]] = i;
-    }
-    for(int i = 0; i < K; i++){
-        t[i] =id[t[i]];
-    }
-    int tmp = 0;
-    for(int i = K-1; i >= 0; i--){
-        tmp <<= 4;
-        tmp |= t[i];
-    }
-    return tmp;
-}
-
-void insert(int st, ll cost){
-    auto it = m[b].find(st);
-    if(it == m[b].end()){
-//cout << hex << st << " add new " << cost << endl;
-        m[b][st] = PI(cost,C);
-    } else{
-//cout << hex << st << " old " << cost << endl;
-        if(it->second.first >  cost){
-            it->second.first = cost;
-            it->second.second = C;
-        } else if(it->second.first == cost){
-            it->second.second += C; MOD(it->second.second);
+    if(k > K) {
+        hs[s] = ++C;
+        v[C] = s;
+        *(ll *)q[C] = *(ll *)c;
+        for(int i = 1; i <= K; i++) {
+            st[C][i] = (t[i] == 1 && c[i] == i);
         }
-    }
-}
-
-void dfs(int i, ll cost, int flag){
-//cout << i << " cost " << cost << " " << flag <<endl;
-    if(i == K){
-//prt(f, 2*K);
-//prt(c, K);
-        for(int j=K; j<2*K; ++j) {
-            if (f[j] == j) t[j-K] = j;
-            else t[j-K] = find(j);
-        }
-//prt(t, K);
-        int st = encode();
-        insert(st,cost);
         return;
     }
-   
-    char* s = f+K; 
-    if(!flag) {
-        if(c[f[i]] > 1){
-            c[f[i]]--;
-            s[i] = i+K;
-            dfs(i+1,cost,false);
-            if(i < K-1) dfs(i+1,cost+lc[row][i],true);
-            c[f[i]]++;
+
+    for(char l = k-1, i = l; i >= 0; i--) {
+        if(i > l) {
+            i = l;
         }
-        s[i] = f[i];
-        dfs(i+1,cost+dc[row][i],false);
-        if(i < K-1) dfs(i+1,cost+lc[row][i]+dc[row][i],true);
-    }   else{
-        s[i] = s[i-1];
-        if(c[f[i]] > 1){
-            c[f[i]]--;
-            dfs(i+1,cost,false);
-            if(i < K-1) dfs(i+1,cost+lc[row][i],true);
-            c[f[i]]++;
+        if(c[i] == i) {
+            if(i == 0) {
+                t[k] = 1;
+                c[k] = k;
+            } else {
+                c[k] = i;
+                t[i]++;
+            }
+            dfs(k+1, s + (c[k]<<f[k]));
+            if(i != 0) t[i]--;
+            c[k] = 0;
         }
-
-        char u = find(s[i]), v = find(f[i]);
-        if(u == v) return;
-        int tmp = f[u];
-        f[u] = v;
-
-        dfs(i+1,cost+dc[row][i],false);
-        if(i < K-1) dfs(i+1,cost+lc[row][i]+dc[row][i],true);
-
-        f[u] = tmp;
-        
-    } 
+        l = min(l,c[i]);
+    }
 }
 
-int main(){
-//    cio("escape");
-    cin >> N >> K;
-    for(int i = 1; i <= N; i++){
-        for(int j = 0; j < K-1; j++){
-            cin >> lc[i][j];   
-        } 
-    } 
-    for(int j = 0; j < K; j++){
-        for(int i = 2; i <= N; i++){
-            cin >> dc[i][j];   
-        }
-    } 
-    //print2();
-/*
-    int mask = 1<<(4*K); mask--;
-    m[0][state & mask] = PI(0,1);
-*/
-    m[0].reserve(4096);
-    m[1].reserve(4096);
-    m[0][state] = PI(0,1);
-    a = 0, b = 1;
-    for(row = 1; row <= N; row++){
-        m[b].clear();
-        for(auto s : m[a]){
-            C = s.second.second;
-            int tmp, sta = s.first;
-            pt = (ll *)c;
-            *pt = 0;
-            for(int j = 0; j < K; j++){
-                tmp = sta & 0xF;
-                f[j] = tmp;
-                sta >>= 4;
-                c[tmp]++;
+void setup()
+{
+    for(int k = 1; k<= K; k++)
+    for(int s = 1; s <= C; s++)
+    for(char d = 0; d < 2; d++) // down plug
+    for(char l = 0; l < 2; l++){ // left plug
+        int ns=v[s];
+        if( d == 0 && l == 0){
+            ns += (k-q[s][k])<<f[k];
+            if(q[s][k] == k){
+                int m = K+1;
+                for(int i = k+1; i <= K; i++) if(q[s][i] == k){
+                    m = min(m,i);
+                }
+                for(int i = k+1; i <= K; i++) if(q[s][i] == k){
+                    ns += (m-q[s][i])<<f[i];
+                }
             }
-//cout << "f "; prt(f, K);
-//prt(c, K);
-            dfs(0,s.second.first,false);
-        } 
-//cout << "row " << row << " " << m[b].size() << endl;
-//cout << "row " << row << endl;
-//print();
-        a ^= 1, b^=1;
+        } else if( d == 1 && l == 1){
+            int u = q[s][k], v = q[s][k-1];
+            int z = min(u,v);
+            for(int i = 1; i <= K; i++) if(q[s][i] == u || q[s][i] == v) {
+                ns += (z-q[s][i])<<f[i];
+            }
+        } else if(l == 1){ // actually it is l==1, and d==0
+            ns += (q[s][k-1]-q[s][k])<<f[k];
+            if(q[s][k] == k){
+                int m = K+1;
+                for(int i = k+1; i <= K; i++) if(q[s][i] == k){
+                    m = min(m,i);
+                }
+                for(int i = k+1; i <= K; i++) if(q[s][i] == k){
+                    ns += (m-q[s][i])<<f[i];
+                }
+            }
+        }
+        tx[s][k][d][l] = hs[ns];
+        if(k == 1) l++;
     }
-    cout << m[a][0].second << endl;
+}
+
+int main()
+{
+    cio("escape");
+    cin >> N >> K;
+    for(int i = 1; i <= N; i++)
+        for(int j = 1; j < K; j++) cin >> lc[i][j];
+    for(int j = 1; j <= K; j++)
+        for(int i = 1; i < N; i++) cin >> dc[i][j];
+    for(int i = 2; i <= K; i++) f[i] = f[i-1]+3;
+    dfs(1,0);
+    setup();
+
+    memset(cost[0], 1, sizeof(cost[0]));
+    cost[0][C] = 0;
+    cnt[0][C] = 1;
+
+    int a = 0, b = 1;
+    for(int i = 1; i <= N; i++){
+        for(int j = 1; j <= K; j++){
+            memset(cost[b], 1, sizeof(cost[b]));
+            for(int s = 1; s <= C; s++) if(cnt[a][s]){
+                for(char d = 0; d < 2; d++){
+                    if(d == 0 && i != 1 && st[s][j]) continue;
+                    for(char l = 0; l < 2; l++){
+                        int ns = tx[s][j][d][l];
+                        if(ns == 0) continue;
+                        ll nc = cost[a][s];
+                        if(l) nc += lc[i][j-1];
+                        if(d) nc += dc[i-1][j];
+                        if(cost[b][ns] == nc){
+                            cnt[b][ns] += cnt[a][s]; MOD(cnt[b][ns]);
+                        } else if(cost[b][ns] > nc){
+                            cost[b][ns] = nc;
+                            cnt[b][ns] = cnt[a][s];
+                        }
+                        if(j == 1) l++;
+                    }
+                    if(i == 1) d++;
+                }
+            }
+            a^=1, b^=1;
+        }
+    }
+    cout << cnt[a][1] << endl;
 }

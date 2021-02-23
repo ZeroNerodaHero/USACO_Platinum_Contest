@@ -51,6 +51,6 @@ For example, in [Sprinklers 2](2020_03Open/sprinklers.cpp), the transition line 
 
 I used PLUG DP to solve [van (USACO 6.1)](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.1/van.cpp) and [betsy (USACO 6.5)](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.5/betsy.cpp).  Here I modify the plug properties to solve the ["Compound Escape" problem](2019_03Open#2-compound-escape) again.
 
-The [code]() is pretty much simimlar to other two problems.  The plug DP is very useful to solve the row-based, such as grid, problems when the size of one row is relatively small.  It greatly improves the performance of related Bellman-Held-Karp Algorithm for these special cases.  As the state space is very much, we should have a way to store the state.  I used hash table in thse cases.
+The [code](2019_03Open/escapeplug.cpp) is pretty much simimlar to other two problems.  The plug DP is used to solve the row-based, such as grid, problems when the size of one row is relatively small.  It greatly improves the performance of the Bellman-Held-Karp Algorithm for these special cases.  As the state space is small but scattered, we should have a way to store the state.  I used hash table in these cases.
 
 

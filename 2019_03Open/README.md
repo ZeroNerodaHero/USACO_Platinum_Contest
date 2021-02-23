@@ -57,11 +57,26 @@ The plug is defined as (state, minimun cost, count), where state is the one row 
 - the plug from the left side must be taken.
 - if plug from both upper layer and left side are taken, there must be no cycle.  In this case, two connected components are united at one.
 
-We use two hash tables to store all the plugs for two consecutive rows.  We use union-find to process the state in each plug at layer i-1.  For cells from [0, K-1], union of two connected components taken the smallest cell number. With this encoding scheme, here is the inital state and answer:
+We use two hash tables to store all the plugs for two consecutive rows.  We use union-find to process the plugs in each state at layer i-1.  For cells from [0, K-1], union of two connected components take the smallest cell number. With this encoding scheme, here is the inital state and answer:
 
 - the inital state or plug is (0, 0, 1)
 - the answer is (0, mincost, count)
 
+The time complexity of plug DP is O(NC<sub>k</sub> * O(dfs)).  As the time complexity of dfs() takes O(8<sup>K</sup>), the [escapeplug.cpp](escapeplug.cpp) has the TLE issue when K increases.
+
+As I debug the code, I find the state of each row does not change. The [escapeplugprofiling.cpp](escapeplugprofiling.cpp) is used to get the  transition table.  All the states forms a state group.  The total number of CC is 203 for K=6.  But the state like (1,2,1,2) are invalid as cross connection is not allowed.  If there is a case (1,2,1,2), it is acutally one connected componets (1,1,1,1) instead of two.  The total number of valid state is 132 when K is 6.
+
+I can use dfs() function in [escapeplug.cpp](escapeplug.cpp) to get the state.  But we can get the state in simpler way.  The [escape_get_number.cpp](escape_get_number.cpp) prints all the state when K is 6.  I use this simpler dfs to get all the state in [escape.cpp](escape.cpp).
+
+As state transition for each row is exactly the same, no multiple dfs() calls are needed.  Here is the [escape.cpp](escape.cpp) algorithm:
+
+- Do one dfs() to get all the states for number K
+- Set the transition table, which used by each row.
+- Do a transition row by row
+
+The state space is very small.  So I can use perfect hash to find the state.  In [escapeplug.cpp](escapeplug.cpp) I use (0,1,2,3,4,5) to represent the connected components.  As one CC is always tagged as 0, I use 4 bits for each connected components for easy debugging. The total bits will be 20.  But in [escape.cpp](escape.cpp), I use (1,2,3,4,5,6) to represent the connected components for easy coding.  So I change to 3 bits so that the total bits of one state is 18 bits.  Thus (1<<18) is enough to build one perfect hash table.
+
+I combined left plug and down plug into one complex plug for transition for fast processing. We can also split complex plug into left plug and down plug.  In that case, we need two simpler transition (tx) table.
 
 ## 3.  Valleys
 

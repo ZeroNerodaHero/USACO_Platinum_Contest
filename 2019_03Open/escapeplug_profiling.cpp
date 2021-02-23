@@ -9,6 +9,9 @@ typedef vector<int> VI;
 #define P 1000000007
 #define MOD(x) if(x>=P) x-=P
 
+#define OO(x) x
+//#define OO(x)
+
 const unsigned int MXH = (1<<20);
 const unsigned int MK = MXH-1;
 const unsigned int MV = ~MK;
@@ -17,6 +20,7 @@ const ll INF=((1ll)<<60);
 
 struct node{
     int st, cnt, v; ll cost;
+    map<int, int> b;
 };
 struct htable{
     node h[MXH];
@@ -41,8 +45,30 @@ struct htable{
         return &h[hash];
     }
 
+    void insert(int st, int nst){
+        int hash = hasher(st);
+        if(h[hash].v != v){
+            h[hash].v = v;
+            h[hash].st = st;
+            h[hash].cost = hash;
+            a[s++] = hash;
+            h[hash].b.clear();
+        }
+        h[hash].b[nst]++;
+    }
+
     node *get(int i) {
         return &h[a[i]];
+    }
+
+    void print(){
+        cout << " size " << s << endl;
+        sort(a, a+s);
+        for(int i=0; i<s; ++i){
+            auto it = get(i);
+            cout << hex << it->st << ": ";
+            for (auto k:it->b) cout << "("<<k.first<< ' '<<k.second<<") "; cout << endl;
+        } cout << dec<< endl;
     }
 };
 
@@ -55,17 +81,11 @@ void cio(string fname){
 
 int N, K, a, b, row;
 int lc[MX][8], dc[MX][8];
-htable m[2];
+htable m[3];
 char f[16];
 int const state = (0x543210);
 
 #if 1
-void print(){
-    for(int i=0; i<m[b].s; ++i){
-        auto it = m[b].get(i);
-        cout << hex << it->st << ": " << it->cost << ' ' << it->cnt << endl;
-    } cout << endl;
-}
 
 void print2(){
     for(int i = 1; i <= N; i++){
@@ -110,6 +130,7 @@ int encode()
     return tmp;
 }
 
+int oldst;
 void insert(int st, ll cost){
     node * it = m[b].find(st);
     if(it->cost > cost){
@@ -118,6 +139,7 @@ void insert(int st, ll cost){
     } else if(it->cost == cost){
         it->cnt += C; MOD(it->cnt);
     }
+    m[2].insert(oldst,st);
 }
 
 void dfs(int i, ll cost, int flag){
@@ -183,9 +205,11 @@ int main(){
     a = 0, b = 1;
     for(row = 1; row <= N; row++){
         m[b].clear();
+        m[2].clear();
         for(int i = 0; i< m[a].s; ++i) {
             auto it = m[a].get(i);
             C = it->cnt;
+            oldst = it->st;
             int tmp, sta = it->st;
             *(ll *)c=0;
             for(int j = 0; j < K; j++){
@@ -196,10 +220,11 @@ int main(){
             }
             dfs(0,it->cost,false);
         }
-        //cout << row << " row " << m[b].s << endl;print();
+        //cout << row << " row "; m[2].print();
         a ^= 1, b^=1;
     }
     it = m[a].find(0);
     cout << it->cnt << endl;
+    OO(m[2].print();)
 }
 
