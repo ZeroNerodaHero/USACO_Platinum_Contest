@@ -12,7 +12,7 @@ First I provide some defintions here:
 - **left/right shortest distance**: If there are two even/odd shortest distances, the left shortest distance is small while the right one is bigger.  If there is only one odd or even shortest distance, the left SF is shortest distance while the right one is 0 or -1 or INF.
 - **team**: a group of vertices with the same left and right shortest distances.  This is similar to [the chain definition](/2020_03Open/README.md#3-circus) in Circus problem.  The team is a group of vertices while the chain is a group of edges, which is slightly different from weight.  All the vertices in team vertex may or may not be directly connected.  With team concept, the self-loop and cross connection can be processed in the same way.
 
-There could be more solutions for this problem.  Some solution does not require problem change.  Some requires the problem change, which I am not sure if it is possible.  Could [Extended Max-Flow Method] (CHANGE.md#7-extended-max-flow-method) be a minimum flow problem?  Will [Enhanced Union-Find Algorithm] (CHANGE.md#8-enhanced-union-find-algorithm) change the way how the graph components are connected?
+There could be more solutions for this problem.  Some solution does not require problem change.  Some requires the problem change, which I am not sure if it is possible.  Could [Extended Max-Flow Method](CHANGE.md#7-extended-max-flow-method) be a minimum flow problem?  Will [Enhanced Union-Find Algorithm](CHANGE.md#8-enhanced-union-find-algorithm) change the way how the graph components are connected?
 
 Here I outline the different solutions.
 
