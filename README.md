@@ -1,7 +1,6 @@
 # USACO_Platinum_Contest
 
-The main point of this repo is to track my learnig process during USACO 2020-2021 season.  All the solutions have been verified at USACO contest website.  I learn for fun, for [a change, a change in problem, a change in solution, a change which leads to the discovery of new algorithm](USACO_Platinum_Contest#7-innovation-of-the-new-algorithm).
-
+The main point of this repo is to track my learnig process during USACO 2020-2021 season.  All the solutions have been verified at USACO contest website.  I learn for fun, for [a change, a change in problem, a change in solution, a change which leads to the discovery of new algorithm](/USACO_Platinum_Contest#7-innovation-of-the-new-algorithm).
 ## Solutions to USACO Platinum problems.
 
 ### 1. New Concept Introduced

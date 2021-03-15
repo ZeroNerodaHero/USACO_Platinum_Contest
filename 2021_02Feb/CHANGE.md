@@ -25,7 +25,7 @@ This depends on the valid edge definition.
     2. Must/Should I help my right team parent?
     3. Can I help myself with self-loop/cross-connection?
 - Benjamin Qi and Danny Mittal define type A/B/C edge.  The algorithm uses vertices with right shortest distance (d1-1) in both upper layer and lower layer to re-contstruct graph.
-- Could algorithm be based on earliest **"copy loop"**?  Only **"copy loop"**, the self-loop or cross connection, needs extra edges.  The copy loop is not a graph cycle.  In the diamond graph (1-2, 1-3, 2-4, 3-4), there is no "copy loop".  The graph becomes a tree after being processed.  Could the algorithm be based on first traversal and second traversal?
+- Could algorithm be based on earliest **"copy loop"**?  Only mandatory right team parent and **"copy loop"**, the self-loop or cross connection, needs extra edges.  The copy loop is not a graph cycle.  In the diamond graph (1-2, 1-3, 2-4, 3-4), there is no "copy loop".  The graph becomes a tree after being processed.  Could the algorithm be based on first traversal and second traversal?
 
 #### 2. Dijkstra Algorithm Without Re-construction
 
