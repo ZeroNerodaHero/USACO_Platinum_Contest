@@ -1,4 +1,7 @@
 # USACO_Platinum_Contest
+
+The main point of this repo is to track my learnig process during USACO 2020-2021 season.  All the solutions have been verified at USACO contest website.  I learn for fun, for [a change, a change in problem, a change in solution, a change which leads to the discovery of new algorithm](USACO_Platinum_Contest#7-innovation-of-the-new-algorithm).
+
 ## Solutions to USACO Platinum problems.
 
 ### 1. New Concept Introduced
@@ -53,4 +56,19 @@ I used PLUG DP to solve [van (USACO 6.1)](https://github.com/ZeroNerodaHero/USAC
 
 The [code](2019_03Open/escapeplug.cpp) is pretty much simimlar to other two problems.  The plug DP is used to solve the row-based, such as grid, problems when the size of one row is relatively small.  It greatly improves the performance of the Bellman-Held-Karp Algorithm for these special cases.  As the state space is small but scattered, we should have a way to store the state.  I used hash table in these cases.
 
+
+### 6. DP Optimization
+
+Some USACO problems need more optimzation:
+
+- 2016 Open 262144: [Use the input data range 1-40](/2016_03Open#1-262144)
+- 2019 Open Escape: [Setup transition table](/2019_03Open#2-compound-escape)
+- 2020 Janunay Minimum Cost Paths: [Find the set of best points](/2021_01Jan#2-minimum-cost-paths)
+
+### 7. Innovation of the new algorithm
+
+The USACO problems is very intriguring.  They lead me to think deeper and deeper into the possible change in problems and solutions:
+
+- [Change in problems: No Time to Dry](/2021_02Feb/CHANGE.md#1-no-time-to-dry)
+- [Different possible solutions with problem change: Minimizing Edges](/2021_02Feb/CHANGE.md#2-minimizing-edges)
 

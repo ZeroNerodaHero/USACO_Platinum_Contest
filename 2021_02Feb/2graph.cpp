@@ -19,13 +19,6 @@ int N, M, T, u,v, ans, d[MX], d1[MX];
 MI m[MX];
 VI g[MX];
 
-void print(MI aa[], int ss)
-{
-    for(int i = 1; i <= ss; i++) { cout << setw(2) <<i << ": ";
-        for(auto& j: aa[i]) cout << "("<< setw(2) <<j.f<<","<< setw(2) <<j.s << ") "; cout << endl;
-    }cout << endl;
-}
-
 int main()
 {
     cin.tie(0)->sync_with_stdio(0);
@@ -38,7 +31,6 @@ int main()
             g[u].push_back(v);
             if(u!=v) g[v].push_back(u);
         }
-//if (t!=3) continue; cout << "t "<< t <<  endl;
 
         queue<PI> q;
         d[1] = 1;
@@ -68,60 +60,42 @@ int main()
         for(int i = 1; i <= D; i++) m[i].clear();
         for(int i = 1; i <= N; i++) m[d[i]][d1[i]]++;
 
-//print(m, D);
         int a = 1, b=0;
         for(int i = 2; i <= D; i++){
             m[b].clear();
-//cout << i << " todo list: "; for(auto &j:m[a]) cout <<"("<<j.f << ", " <<j.s<<") "; cout<<endl;;
             for(auto& j: m[i]){
-//cout << i << ": " << j.f << ", " << j.s << " ans " << ans << endl;
                 auto best = m[i-1].find(j.f-1); // increasing
                 auto must = m[a].find(j.f+1); // decreasing
                 if(best == m[i-1].end()) { // not set by increasing parent d1
                     if(must != m[a].end()) {
                         if(must->s >0) { 
-                            if (j.s<must->s) {
-                                ans+= must->s-j.s;
-//cout << "\tmust : " << must->f << ", " << must->s << " add more " << (must->s-j.s) << endl;
-                            } 
+                            if (j.s<must->s) ans+= must->s-j.s;
                         } else {
                             ans -= min(-must->s, j.s);
-//cout << "\tmust : " << must->f << ", " << must->s <<" sub more " << (min(-must->s, j.s))<< endl;
                         }
                     }
 
                     if(j.f==i+1) {
                         ans+=(j.s+1)/2;
-//cout << "\tmust circle : add " << ((j.s+1)/2) << endl;
                     } else {
                         m[b][j.f] = j.s;
-//cout << "\tmust : push to next  " << j.s << endl;
                     }
-//cout << "\tmust : " << j.f << ", " << j.s << " ans " << ans << endl;
                 } else { // set by increasing parent d1
-//cout << "\tbest : " << best->f << ", " << best->s << " ans " << ans << endl;
                     if(must != m[a].end()) {
                         int v = min(abs(must->s), j.s);
-                        if(must->s>0) {ans += must->s;
-//cout << "\tbest : " << must->f << ", " << must->s << " add more " << (must->s) << endl;
-                        }
+                        if(must->s>0) ans += must->s;
                         if(j.f==i+1) {
                             ans += (v+1)/2-v;
-//cout << "\tbest : sub circle" << ((v+1)/2-v) << " ans " << ans << endl;
                         } else { // I must depend on best one
                             m[b][j.f] = -v;  // optimize via loop
-//cout << "\tbest : push to next  " << (-v) << " ans " << ans << endl;
                         }
-//cout << "\tbest : must " << must->f << ", " << must->s << " ans " << ans << endl;
                     }
                 }
-//cout << i << ": " << j.f << ", " << j.s << " ans " << ans << endl;
             }
 
             a^=1; b^=1;
         }
 
         cout << ans << endl;
-//print(m, D);
     }
 }

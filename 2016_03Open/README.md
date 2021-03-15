@@ -23,6 +23,8 @@ The DP transition is as follows:
 
 In order to avoid boundary check, 0 is reserved for invalid range in [262144.cpp](262144.cpp).
 
+As only 2<sup>n</sup> consecutive equal values can be merged, there is O(N) greedy algorithm, which checks if the small values can be merged to left or right value.
+
 ## 2. Bull in a China Shop
 
 ## 3. Landscaping
