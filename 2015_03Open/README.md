@@ -22,7 +22,7 @@ This reminds me of interval DP like longest palindromic subsequence.  We define 
 
     dp[l][a][b][c][d]: number of palindromic routes from point (a,b) to (c,d) with lenght 2*l+1
     initial state: dp[0][1][N][1][N] = ... = dp[0][N][1][N][1] = 1
-    transition: dp[l][a][b][c][d] = sum (4 pair of neighboring points dp[l-1][A][B][C][D]) if a[A][B]=a[C][D], A>=C, B<=D
+    transition: dp[l][a][b][c][d] = sum (4 pair of neighboring points dp[l-1][A][B][C][D]) if a[A][B]=a[C][D], A<=C, B<=D
     answer: dp[N-1][1][1][N][N]
 
 The time complexity is O(N<sup>5</sup>).  The 4 pairs of points a[A][B] and a[C][D] are constrained.  Their Manhattan distances to **the same point** on the secondary diagonal equals to l-1.  We can start constructing palindromic string from the points on in the secondary diagonal.  There are different ways to define the DP state.  Here is the one in [palpath.cpp](palpath.cpp).
