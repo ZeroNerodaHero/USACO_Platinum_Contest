@@ -15,7 +15,7 @@ void cio(string fname){
     freopen((fname+".out").c_str(),"w",stdout);
 }
 
-int N, ans, f[MX], t[MX]; //trapped
+int N, ans, f[MX], l, r; //trapped
 PI a[MX];
 
 int find(int x){
@@ -26,18 +26,18 @@ int find(int x){
 }
 
 bool check(int k){
-    int l=k, r=k+1;
+    l=k, r=k+1;
     while((l>0) && (r<=N)) {
         int d = a[r].f - a[l].f;
         if(d > a[l].s) f[l]=find(l-1), l=f[l];
         else if (d > a[r].s) r++;
         else{
             // any point in range [k,r) is trapped.
-            for (int i=k; i<r; i++) t[i]= 1, f[i]=l;
+            for (int i=k; i<r; i++) f[i]=l;
             return true;
         }
-        //if (1 == t[l]) return false;
     }
+    r = 0;
     return false;
 }
 
@@ -47,7 +47,7 @@ int main(){
     for (int i=1; i<=N; f[i]=i, i++) cin >> a[i].s >> a[i].f;
     sort(a+1, a+N+1);
     for (int i=1; i<N; i++){
-        if (t[i]) { //trapped
+        if (i < r) { //trapped
             ans += a[i+1].f-a[i].f;
             continue;
         }

@@ -1,6 +1,6 @@
 # USACO_Platinum_Contest
 
-The main point of this repo is to track my learnig process during USACO 2020-2021 season.  All the solutions have been verified at USACO contest website.  I learn for fun, for [a change, a change in problem, a change in solution, a change which leads to the discovery of new algorithm](/README.md#7-innovation-of-the-new-algorithm).
+The main point of this repo is to track my learning process during USACO 2020-2021 season.  All the solutions have been verified at USACO contest website.  I learn for fun, for [a change, a change in problem, a change in solution, a change which leads to the discovery of new algorithm](/README.md#7-innovation-of-the-new-algorithm).
 ## Solutions to USACO Platinum problems.
 
 ### 1. New Concept Introduced
@@ -30,7 +30,7 @@ First the DP state is defined as follows:
 
     dp[n][k]: the total number of k inversions for all permutation with n objects.
 
-Now we add the number n to the permuation of n-1 objects.  There are n position which we can insert the nth object.  If it is appended at the end, it adds 0 more inversion.  WLOG assumes that there are n-1-i more inversions if nth object is added at position i.  Thus we get the DP transition formula as follows:
+Now we add the number n to the permutation of n-1 objects.  There are n position which we can insert the nth object.  If it is appended at the end, it adds 0 more inversion.  WLOG assumes that there are n-1-i more inversions if nth object is added at position i.  Thus we get the DP transition formula as follows:
 
     dp[n][k] = sigma(dp[n-1][k-i]) for i=[0, min(n-1, k)]
 
@@ -44,7 +44,7 @@ For K inversions, we only care about (K-i) number of inversion at dp[n-1] level,
 
 ### 4. Vague Definition
 
-Sometimes we have to convert vague defintion to clear defintion.
+Sometimes we have to convert vague definition to clear definition.
 
 For example, in [Sprinklers 2](2020_03Open/sprinklers.cpp), the transition line is above the read block or on the left side of blue block. It is not exactly at one point (i, j).  Another example is [Out of Sorts](2018_03Open/sort.cpp).  The partition point is between i and i+1, not at i or i+1. For these cases, the clear definition must be provided to complete the computation.
 
@@ -53,21 +53,22 @@ For example, in [Sprinklers 2](2020_03Open/sprinklers.cpp), the transition line 
 
 I used PLUG DP to solve [van (USACO 6.1)](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.1/van.cpp) and [betsy (USACO 6.5)](https://github.com/ZeroNerodaHero/USACO-Training-Gateway/blob/master/6.5/betsy.cpp).  Here I modify the plug properties to solve the ["Compound Escape" problem](2019_03Open#2-compound-escape) again.
 
-The [code](2019_03Open/escapeplug.cpp) is pretty much simimlar to other two problems.  The plug DP is used to solve the row-based, such as grid, problems when the size of one row is relatively small.  It greatly improves the performance of the Bellman-Held-Karp Algorithm for these special cases.  As the state space is small but scattered, we should have a way to store the state.  I used hash table in these cases.
+The [code](2019_03Open/escapeplug.cpp) is pretty much similar to other two problems.  The plug DP is used to solve the row-based, such as grid, problems when the size of one row is relatively small.  It greatly improves the performance of the Bellman-Held-Karp Algorithm for these special cases.  As the state space is small but scattered, we should have a way to store the state.  I used hash table in these cases.
 
 
 ### 6. DP Optimization
 
-Some USACO problems need more optimzation:
+Some USACO problems need more optimization:
 
 - 2016 Open 262144: [Use the input data range 1-40](/2016_03Open#1-262144)
 - 2019 Open Escape: [Setup transition table](/2019_03Open#2-compound-escape)
-- 2020 Janunay Minimum Cost Paths: [Find the set of best points](/2021_01Jan#2-minimum-cost-paths)
+- 2020 January Minimum Cost Paths: [Find the set of best points](/2021_01Jan#2-minimum-cost-paths)
 
 ### 7. Innovation of the new algorithm
 
-The USACO problems is very intriguring.  They lead me to think deeper and deeper into the possible change in problems and solutions:
+The USACO problems is very intriguing.  They lead me to think deeper and deeper into the possible change in problems and solutions:
 
-- [Change in problems: No Time to Dry](/2021_02Feb/CHANGE.md#1-no-time-to-dry)
-- [Different possible solutions with problem change: Minimizing Edges](/2021_02Feb/CHANGE.md#2-minimizing-edges)
+- [No Time to Dry](/2021_02Feb/CHANGE.md#1-no-time-to-dry): If we change Q to be 2\*10<sup>6</sup>, my [online algorithm](/2021_02Feb/1dry.cpp) should still pass all the test cases.
+- [Landscaping](/2016_03Open/README.md#3-landscaping): My [online solution](/2016_03Open/landscape.cpp) does not depends on the maximum value of (B<sub>i</sub> or A<sub>i</sub>), which is 10 in problem.
+- [Minimizing Edges](/2021_02Feb/CHANGE.md#2-minimizing-edges): We could possibly have different changes in solutions and problem.
 
