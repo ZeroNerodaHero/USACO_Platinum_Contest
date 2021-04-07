@@ -66,7 +66,7 @@ The [online greedy algorithm](landscape.cpp) does not depends on K, the maximum 
 
 This definitely has TLE issue as there could be O(N<sup>2</sup>) edges. There are several ways to build flow network with cost in the form of (capacity, cost).
 
-This definitely has TLE issue as N is big.  First split any location i into two vertices (i, I).  Then construct one flow network as follows
+Here is one way to build flow network.  First split any location i into two vertices (i, I).  Then construct one flow network as follows
 - From s to location i has the (A<sub>i</sub>, 0)
 - From location i to t has the (INF, X)
 - From s to location I has the (INF, Y)
@@ -76,6 +76,6 @@ This definitely has TLE issue as N is big.  First split any location i into two 
 We can also build a flow network without splitting vertices.  The directed edge is based on capacity=(B<sub>i</sub>-A<sub>i</sub>) in [landscape.cpp](landscape.cpp).  The vertex with capacity 0 can be filtered out out flow network.
 
 Can we build one weighted bipartite graph by using Hungarian Algorithm?
-    - Set U of vertices need to purchase dirt
-    - Set V of vertices need to ship away dirt
+- Set U of vertices need to purchase dirt
+- Set V of vertices need to ship away dirt
 

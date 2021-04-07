@@ -58,11 +58,34 @@ The [code](2019_03Open/escapeplug.cpp) is pretty much similar to other two probl
 
 ### 6. DP Optimization
 
-Some USACO problems need more optimization:
+Here are some DP optimization techniques used for some USACO problems.
 
-- 2016 Open 262144: [Use the input data range 1-40](/2016_03Open#1-262144)
-- 2019 Open Escape: [Setup transition table](/2019_03Open#2-compound-escape)
-- 2020 January Minimum Cost Paths: [Find the set of best points](/2021_01Jan#2-minimum-cost-paths)
+##### Monotonic queue/stack
+
+Similar to the problem "Maximum value in sliding window", priority queue can be used to improve efficiency.  But montonic queue is more efficient.
+- [Photo in 2013 Open]() : convert O(N<sup>2</sup>) to O(N) by using monotonic queue.
+- [Trapped in the Haybales](/2015_03Open#3-trapped-in-the-haybales-gold) : We can not use monotonic queue as the monotonicity is subject to change.  Instead we use priority queue in solution.  Maybe red-black tree is better than priority queue.
+
+##### Convex Hull Trick
+
+    dp[j] = min(dp[k] + b[k] * a[j]) for k < j
+    dp[i][j] = min(dp[i-1][k] + b[k] * a[j]} for k < j
+
+USACO problems:
+- [Falling Portals 202001]()
+- [Minimum Cost Paths 202101](): [Find the set of best points](/2021_01Jan#2-minimum-cost-paths)
+
+##### Divide and Conquer DP
+
+    dp[i][j] = min(dp[i-1][k] + C[k][j]) for k < j
+
+##### Knuth's optimization
+
+    dp[i][j] = min(dp[i][k] + dp[k][j]) + C[i][j] for i < k < j
+
+##### Quadrangle inequalities: C([a][c]+C[b][d]<=C[a][d]+C[b][c] for a<=b<=c<=d.
+##### xD/yD dynamic programming
+
 
 ### 7. Innovation of the new algorithm
 
