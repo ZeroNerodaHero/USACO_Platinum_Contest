@@ -123,7 +123,6 @@ int main()
 
 
                     if(j==0) {
-if(x1<=x&&y<=y1)
                     for(x2=x1; x2<=x; ++x2) {  //00
                         for(y2=y; y2<=y1; ++y2) {
                             z= (x2<<8)|y2;
@@ -132,48 +131,40 @@ if(x1<=x&&y<=y1)
                     }
 
                     y3 = min(y-1, y1);
-if(x1<=x&x<=y3) {
                     for(x2=x1; x2<=x; ++x2) { //01
                         for(y2=x; y2<=y3; ++y2) {
                             z= (x2<<8)|y2;
                             m[b][1].add(z, val);
                         }
                     }
-}
 
                     x3 = max(x+1, x1);
-if(y<=y1&&x3<=y) {
                     for(x2=x3; x2<=y; ++x2) { //10
                         for(y2=y; y2<=y1; ++y2) {
                             z= (x2<<8)|y2;
                             m[b][2].add(z, val);
                         }
                     }
-}
 
                     x1 = max(x+1, x1);
                     y1 = min(y-1, y1);
                     } else if (j==1) {
 
-if(x1<=x) {
                     for(x2=x1; x2<=x; ++x2) { //01
                         for(y2=x; y2<=y1; ++y2) {
                             z= (x2<<8)|y2;
                             m[b][1].add(z, val);
                         }
                     }
-}
                     x1 = max(x+1, x1);
                     } else if (j==2) {
 
-if(y<=y1) {
-                    for(x2=x1; x2<=y; ++x2) { //10
-                        for(y2=y; y2<=y1; ++y2) {
+                    for(y2=y; y2<=y1; ++y2) {
+                        for(x2=x1; x2<=y; ++x2) { //10
                             z= (x2<<8)|y2;
                             m[b][2].add(z, val);
                         }
                     }
-}
 
                     y1 = min(y-1, y1);
                     }
