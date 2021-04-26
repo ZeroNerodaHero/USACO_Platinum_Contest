@@ -32,14 +32,14 @@ int checkloop(int s, int e) {
 }
 
 int checkloop2() {
-	ll x = checkloop(loop[0].f, loop[1].s);
-	x *= checkloop(loop[1].f, loop[0].s); MOD2(x);
-	return x;
+    ll x = checkloop(loop[0].f, loop[1].s);
+    x *= checkloop(loop[1].f, loop[0].s); MOD2(x);
+    return x;
 }
 
 int inverse(ll b){
     ll z= 1;
-	int y=P-2;
+    int y=P-2;
     while(y){
         if(y & 1) {z *= b;MOD2(z);}
         b = b*b; MOD2(b);
@@ -77,7 +77,7 @@ int main()
                 if(b[j] == '1') {
                     dout[i]++, din[j]++;
                     if(i>j) loop[k++]=PI(i,j);
-                   	else g[i].push_back(j);
+                    else g[i].push_back(j);
                 }
             }
         }
@@ -88,15 +88,15 @@ int main()
             ans*=perm[din[i]]; MOD2(ans);
         }
         if(K>0) {
-			ll x = checkloop(loop[0].f, loop[0].s);
-			if(K==2) {
-				ll y = checkloop(loop[1].f, loop[1].s);
-				x -= (x-1)*y; x%=P;
-				if(loop[0].f >= loop[1].s) {
-					x+=checkloop2();
-				}
-			}
-			ans = ((1LL-x)*ans)%P; MODS(ans);
+            ll x = checkloop(loop[0].f, loop[0].s);
+            if(K==2) {
+                ll y = checkloop(loop[1].f, loop[1].s);
+                x -= (x-1)*y; x%=P;
+                if(loop[0].f >= loop[1].s) {
+                    x+=checkloop2();
+                }
+            }
+            ans = ((1LL-x)*ans)%P; MODS(ans);
         }
         cout << ans << endl;
     }
