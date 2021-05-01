@@ -38,8 +38,8 @@ The top[] is the top node of one chain heavy or light chain, for example, the to
 
 - Linked list: find the path from root to u and v by DFS.  Time complexity O(N)
 - Parent pointer with level: setup parent pointer and level, then do a query. 
+- Segment tree (RMQ) : 
 - Tarjan offline algorithm: support multiple query in one DFS
-- Segment tree (RMQ) : offline algorithm
 - TLS : [online algorithm](tls_lca.cpp)
 
 
