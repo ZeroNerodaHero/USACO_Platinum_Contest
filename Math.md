@@ -1,5 +1,4 @@
 # Mathmatics in USACO Platinum Contest
-
 I am going to learn the following mathmatics topics.
 
 ## 1. Four Broad Parts of Mathematics
